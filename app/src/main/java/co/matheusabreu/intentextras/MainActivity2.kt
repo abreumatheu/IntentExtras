@@ -16,10 +16,17 @@ class MainActivity2 : AppCompatActivity() {
         val i = intent
         val nome = i.extras?.getString("nome")
 
-        if(nome.equals("") || nome == null){
-            Toast.makeText(applicationContext, "Nome não inserido", Toast.LENGTH_LONG).show()
-        }else{
-            binding.textNome.setText("Olá $nome")
+        binding.editNome.setText(nome)
+
+        binding.buttonOk.setOnClickListener {
+            i.putExtra("nome", binding.editNome.text.toString())
+            setResult(1,i)
+            finish()
+        }
+
+        binding.buttonCancelar.setOnClickListener{
+            setResult(2,i)
+            finish()
         }
     }
 }
